@@ -31,9 +31,15 @@ public class MyScript : MonoBehaviour
     public string myString; //string - a collection of characters
     public char myChar;     //character - a single character
     public Text scoreText;
+
     //methods let you manipulate variables
     //you can call methods (run them) from inside other methods
     //in C# you can define methods in any order
+    private void Start()
+    {
+        MyMethod();
+    }
+    
     public void MyMethod()
     {
         //all three of these add 1 to myInteger
@@ -41,13 +47,9 @@ public class MyScript : MonoBehaviour
         //myInteger = myInteger + 1;
         //myInteger += 1;
 
+        //also valid:
         //myInteger -= 1;
         //myInteger *= 5;
-    }
-
-    private void Start()
-    {
-        MyMethod();
     }
 
 
