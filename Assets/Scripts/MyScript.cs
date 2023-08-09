@@ -1,9 +1,9 @@
 //This is C# - Object Oriented Programming language (OOP)
 //C# has specific syntax rules you have to follow
-    //ending a line with a ;
-    //enclosing condition within ()
-    //group statements with {}
-    //case sensitive - C and c are not the same
+//ending a line with a ;
+//enclosing condition within ()
+//group statements with {}
+//case sensitive - C and c are not the same
 
 //these are bundles of pre-written code
 //keyword "using" tells our script to include a library
@@ -23,10 +23,10 @@ public class MyScript : MonoBehaviour
 {
     //a varibale is a container to store data we can compare, change, and copy
     //we have to declare a variable before we can use it
-        //public/private - whether the variable can be seen from another script
-        //data type - what kind of data the variable will hold
-        //name - what the variable is called
-   [SerializeField] private int myInteger;   //integer - a whole number
+    //public/private - whether the variable can be seen from another script
+    //data type - what kind of data the variable will hold
+    //name - what the variable is called
+    [SerializeField] private int myInteger;   //integer - a whole number
     public float myFloat;   //float - number with a decimal place
     public string myString; //string - a collection of characters
     public char myChar;     //character - a single character
@@ -39,7 +39,7 @@ public class MyScript : MonoBehaviour
     {
         MyMethod();
     }
-    
+
     public void MyMethod()
     {
         //all three of these add 1 to myInteger
@@ -55,8 +55,26 @@ public class MyScript : MonoBehaviour
 
     private void Update()
     {
+        IncreaseMyFloat();
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    myFloat += 2f;
+        //}
         scoreText.text = "Score: " + myInteger.ToString();
         //Score: 1
     }
 
+    public void IncreaseMyFloat()
+    {
+        //if (true)
+        //{ DoTheseThings(); }
+        //else
+        //{ DoSomethingElse(); }
+        if (Input.GetKeyDown("space"))
+        {
+            myFloat += 2f;
+            
+        }
+        
+    }
 }
