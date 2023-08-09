@@ -1,67 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private float walkSpeed;
+    //we establish our variables required
+    [SerializeField] private float walkSpeed = 0;
     [SerializeField] private float runSpeed;
     [SerializeField] private float crouchSpeed;
-    [SerializeField] private Vector3 direction; //Vector3 is a struct - stores data
-                                                //direction.x, direction.y, direction.z
-                                                //[SerializeField] private Transform myTransform;
-    [SerializeField] private int frame;
+    [SerializeField] private Vector3 direction;
+        //Vector3 is a *struct* - a varbiale which holds other variables
+            //direction.x, direction.y, direction.z
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        //myTransform = GetComponent<Transform>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        //Call the Move method every frame
         Move();
-        //Application.targetFrameRate = frame;
     }
 
     private void Move()
     {
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    myTransform.position += Vector3.forward; //(0,0,1) + (1,1,9) = (1,1,10)
-        //}
-        float horizontal = 0;
-        float vertical = 0;
+        //Set our direction based on the player's inputs (using left/right and forward/back axes)
+        direction.x = Input.GetAxis("Horizontal");
+        direction.z = Input.GetAxis("Vertical");
 
+        //run the GetSpeed method and set "speed" to equal the result
+        float speed = GetSpeed();   //GetSpeed() stands in for a number we calculate at the time
 
-        //if (Input.GetKey("right"))
-        //    horizontal = 1;
-        //if (Input.GetKey("left"))
-        //    horizontal = -1;
-        
-        //if (Input.GetKey("up"))
-        //    vertical = 1;
-        //if (Input.GetKey("down"))
-        //    vertical = -1;
+        //add our direction times our speed and deltaTime, to our current position
+        transform.position += direction * speed * Time.deltaTime;
+    }
 
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-
-        direction.x = horizontal;
-        direction.y = 0;
-        direction.z = vertical;
-
+    private float GetSpeed()
+    {
+        //Get a local float and set it to default walk speed
         float speed = walkSpeed;
 
+        //if the player is sprinting or crouching, change the local float
         if (Input.GetKey(KeyCode.LeftShift))
             speed = runSpeed;
         if (Input.GetKey(KeyCode.LeftControl))
             speed = crouchSpeed;
 
-        transform.position += direction * speed * Time.deltaTime;
-
-        
+        //Return the value of that float (it will equal walkSpeed, runSpeed, or crouchSpeed)
+        return speed;
     }
 }
